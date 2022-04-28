@@ -6,8 +6,12 @@ class Device:
         self.hosts = set()
 
     def __str__(self) -> str:
-        device_str = f"id : {self.id} available : {self.available} "
-
+        device_str = "device:\n" + f"id : {self.id} available : {self.available} \nlinks: \n"
+        for link in self.links:
+            device_str += str(link) + "\n"
+        device_str += f"host(s): {len(self.hosts)}\n"
+        for host in self.hosts:
+            device_str += str(host) + "\n"
         return device_str
 
 
