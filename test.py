@@ -1,22 +1,24 @@
 import json
 import requests
+import json_custom
 
 username = 'karaf'
 password = 'karaf'
-http = 'http://192.168.56.101:8181'
-filename = r'C:\Users\PuHaty\Documents\python\scht_restapi\flows\switch1.json'
+ip = "192.168.56.101"
+port = "8181"
+http = f"http://{ip}:{port}"
 headers = {
-    'Content-type': 'application/json',
+    "Content-type": "application/json",
     "Accept": "application/json"
 }
-with open(filename, "r") as file:
-    default_payload = json.load(file)
 
-#def create_json()
+def post_flow(priority, timeout, deviceId, out_port, in_port, ip_dst):
+    payload = json_custom.create_json(priority, timeout, deviceId, out_port, in_port, ip_dst)
+    flow = requests.post(f"{http}/onos/v1/flows/of:{deviceId}",
+                        auth = (username, password),
+                        json = payload,
+                        headers = headers)
 
-xd = requests.post(http + "/onos/v1/flows/of:0000000000000001",
-                   auth = (username, password),
-                   json = default_payload,
-                   headers = headers)
+    print(flow.status_code, " ", flow.reason)
 
-print(xd.status_code, " ", xd.reason)
+post_flow(40000, 0, "0000000000000001", "3", "1", "10.0.0.4")
