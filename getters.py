@@ -17,11 +17,11 @@ class Getters:
             # print(temp.status_code, " ", temp.reason)
             temp_json = temp.json()
             devices_temp = temp_json["devices"]
-            for i in devices_temp:
-                if (i["type"] == "SWITCH"):
-                    self.devices.add(Device(i["id"].strip("of:"), i["available"]))
-            for i in self.devices:
-                print(i)
+            for device in devices_temp:
+                if (device["type"] == "SWITCH"):
+                    self.devices.add(Device(device["id"].strip("of:"), device["available"]))
+            for device in self.devices:
+                print(device)
         except requests.HTTPError() as err:
             print(f"connection problem\n {err}")
 
@@ -35,22 +35,22 @@ class Getters:
             temp_json = temp.json()
             hosts_temp = temp_json["hosts"]
             print(hosts_temp)
-            for i in hosts_temp:
-                ip = i["ipAddresses"][0]
-                mac = i["mac"]
-                locations_dict = i["locations"][0]
+            for host in hosts_temp:
+                ip = host["ipAddresses"][0]
+                mac = host["mac"]
+                locations_dict = host["locations"][0]
                 element_id = locations_dict["elementId"]
                 port = locations_dict["port"]
-            for i in self.devices:
-                if i.id == element_id:
-                    host_device = i
+            for device in self.devices:
+                if device.id == element_id:
+                    host_device = device
             host = Host(ip, mac, host_device, element_id, port)
             self.hosts.add(host)
-            for i in self.devices:
-                if i.id == host.element_id:
-                    i.hosts.add(host)
-            for i in self.hosts:
-                print(i)
+            for device in self.devices:
+                if device.id == host.element_id:
+                    device.hosts.add(host)
+            for host in self.hosts:
+                print(host)
         except requests.HTTPError() as err:
             print(f"connection problem\n {err}")
 
@@ -60,17 +60,17 @@ class Getters:
             temp = session.get(url)
             temp_json = temp.json()
             links_temp = temp_json["links"]
-            for i in links_temp:
-                src = i["src"]
-                dst = i["dst"]
-                state = i["state"]
-                link_type = i["type"]
-                for i in self.devices:
-                    if i.id == src["device"]:
-                        i.links.add(Link(src["device"], src["port"], dst["device"],\
+            for link in links_temp:
+                src = link["src"]
+                dst = link["dst"]
+                state = link["state"]
+                link_type = link["type"]
+                for device in self.devices:
+                    if device.id == src["device"]:
+                        device.links.add(Link(src["device"], src["port"], dst["device"],\
                                          dst["port"], state, link_type))
-                for i in self.devices:
-                    print(i)
+                for device in self.devices:
+                    print(device)
         except requests.HTTPError() as err:
             print(f"connection problem\n {err}")
 

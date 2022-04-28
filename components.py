@@ -7,6 +7,7 @@ class Device:
 
     def __str__(self) -> str:
         device_str = f"id : {self.id} available : {self.available} "
+
         return device_str
 
 
