@@ -1,4 +1,4 @@
-def create_json(priority, timeout, deviceId, out_port, in_port, ip_dst):
+def create_json(priority, timeout, deviceId, out_port, ip_dst):
     json = {
         "priority": priority,
         "timeout": timeout,
@@ -14,10 +14,6 @@ def create_json(priority, timeout, deviceId, out_port, in_port, ip_dst):
         },
         "selector": {
             "criteria": [
-                {
-                    "type": "IN_PORT",
-                    "port": in_port
-                },
                 {
                     "type": "ETH_TYPE",
                     "ethType": "0x0800"

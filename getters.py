@@ -8,6 +8,9 @@ class Getters:
     def __init__(self):
         self.devices = set()
         self.hosts = set()
+        self.get_links()
+        self.get_hosts()
+        self.get_devices()
 
     def get_devices(self):
         try:
@@ -67,9 +70,9 @@ class Getters:
         for device in self.devices:
             print(device)
 
-g = Getters()
-g.get_devices()
-g.get_links()
-g.get_hosts()
-g.print_devices()
+# g = Getters()
+# g.get_devices()
+# g.get_links()
+# g.get_hosts()
+# g.print_devices()
 

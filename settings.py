@@ -13,15 +13,3 @@ headers = {
 }
 session = requests.session()
 session.auth = (username, password)
-
-
-def post_simple_flow(priority, timeout, deviceId, out_port, in_port, ip_dst):
-    payload = json_custom.create_json(priority, timeout, deviceId, out_port, in_port, ip_dst)
-    flow = session.post(f"{http}/flows/of:{deviceId}",
-                        headers = headers,
-                        json = payload)
-    print(flow.status_code, " ", flow.reason)
-
-
-
-#post_simple_flow(40000, 0, "0000000000000001", "3", "1", "10.0.0.4")
