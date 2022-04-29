@@ -16,10 +16,10 @@ class Device:
 
 
 class Host:
-    def __init__(self, ip, mac, switch, elem_id, port):
+    def __init__(self, ip, mac, device, elem_id, port):
         self.ip_address = ip
         self.mac = mac
-        self.switch = switch
+        self.device = device
         self.element_id = elem_id
         self.port = port
 

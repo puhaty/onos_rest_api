@@ -13,13 +13,16 @@ def post_simple_flow(priority, timeout, deviceId, out_port, ip_dst):
 def post_flow(host_1, host_2, route, stream):
     devices = {}
     g = Getters()
+    g.get_devices()
+    g.get_links()
+    g.get_hosts()
     for device in g.devices:
         devices[device.id] = device
     for device_id in route:
-        current_device = devices[device.id]
+        current_device = devices[device_id]
         if current_device.id == route[0]:
             for host in current_device.hosts:
-                if host.ip == host_1:
+                if host.ip_address == host_1:
                     post_simple_flow(40000, 40, device_id, host.ip_address, host.port)
                     break
             for link in current_device.links:
@@ -29,7 +32,7 @@ def post_flow(host_1, host_2, route, stream):
                     link.value = + int(stream)
         elif current_device.id == route[-1]:
             for host in current_device.hosts:
-                if host.ip == host_2:
+                if host.ip_address == host_2:
                     post_simple_flow(40000, 40, device_id, host.ip_address, host.port)
                     break
             for link in current_device.links:

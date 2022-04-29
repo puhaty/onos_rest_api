@@ -8,9 +8,6 @@ class Getters:
     def __init__(self):
         self.devices = set()
         self.hosts = set()
-        self.get_links()
-        self.get_hosts()
-        self.get_devices()
 
     def get_devices(self):
         try:
