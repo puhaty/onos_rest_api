@@ -8,6 +8,7 @@ class Getters:
     def __init__(self):
         self.devices = set()
         self.hosts = set()
+        self.flows = {}
 
     def get_devices(self):
         try:
@@ -63,13 +64,29 @@ class Getters:
         except requests.HTTPError() as err:
             print(f"connection problem\n {err}")
 
+    def get_flows(self):
+        try:
+            url = f"{http}/flows"
+            temp = session.get(url)
+            temp_json = temp.json()
+            flows_temp = temp_json["flows"]
+            for flow in flows_temp:
+                id = flow["id"]
+                device = flow["deviceId"].strip("of:")
+                self.flows[device] = id
+            #
+        except requests.HTTPError() as err:
+            print(f"connection problem\n {err}")
+
     def print_devices(self):
         for device in self.devices:
             print(device)
 
-# g = Getters()
+g = Getters()
+g.get_flows()
 # g.get_devices()
 # g.get_links()
 # g.get_hosts()
 # g.print_devices()
+
 

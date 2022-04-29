@@ -1,6 +1,14 @@
+import requests
+
 import json_custom
 from getters import Getters
 from settings import session, http, headers
+
+g = Getters()
+g.get_devices()
+g.get_links()
+g.get_hosts()
+g.get_flows()
 
 def post_simple_flow(priority, timeout, deviceId, out_port, ip_dst):
     payload = json_custom.create_json(priority, timeout, deviceId, out_port, ip_dst)
@@ -12,10 +20,6 @@ def post_simple_flow(priority, timeout, deviceId, out_port, ip_dst):
 
 def post_flow(host_1, host_2, route, stream):
     devices = {}
-    g = Getters()
-    g.get_devices()
-    g.get_links()
-    g.get_hosts()
     for device in g.devices:
         devices[device.id] = device
     for device_id in route:
@@ -49,5 +53,9 @@ def post_flow(host_1, host_2, route, stream):
                     post_simple_flow(40000, 40, device_id, host_2, link.src_port)
                     link.value = + int(stream)
 
+def delete_flows():
+    for deviceId, id in g.flows.items():
+        xd = session.delete(f"{http}/flows/of:{deviceId}/{id}")
 
-post_simple_flow(40000, 0, "0000000000000001", "3", "10.0.0.4")
+delete_flows()
+# post_simple_flow(40000, 0, "0000000000000001", "3", "10.0.0.4")
