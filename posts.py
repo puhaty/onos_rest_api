@@ -50,7 +50,8 @@ def post_flow(host_1, host_2, route, stream):
 
 def delete_flows():
     for deviceId, id in g.flows.items():
-        session.delete(f"{http}/flows/of:{deviceId}/{id}")
+        temp = session.delete(f"{http}/flows/of:{deviceId}/{id}")
+        print(temp.status_code, " : ", temp.reason)
 
 
 # delete_flows()

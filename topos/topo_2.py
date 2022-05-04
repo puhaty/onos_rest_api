@@ -48,7 +48,7 @@ class MyTopo(Topo):
         self.addLink(h12, s12)
         self.addLink(s1, s2, cls = TCLink, bw = 10, delay = '30ms')
         self.addLink(s2, s3, cls = TCLink, bw = 10, delay = '30ms')
-        self.addLink(s3, s4, cls = TCLink, bw = 10, delay = '30ms')
+        self.addLink(s3, s4, cls = TCLink, bw = 10, delay = '300000ms')
         self.addLink(s4, s5, cls = TCLink, bw = 10, delay = '30ms')
         self.addLink(s5, s6, cls = TCLink, bw = 10, delay = '30ms')
         self.addLink(s6, s7, cls = TCLink, bw = 10, delay = '30ms')
