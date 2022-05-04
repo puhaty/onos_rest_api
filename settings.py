@@ -11,5 +11,7 @@ headers = {
     "Content-type": "application/json",
     "Accept": "application/json"
 }
+priority = 40000
+timeout = 40
 session = requests.session()
 session.auth = (username, password)

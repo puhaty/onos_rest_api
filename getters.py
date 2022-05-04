@@ -35,7 +35,7 @@ class Getters:
                 link_type = link["type"]
                 for device in self.devices:
                     if device.id == src["device"].strip("of:"):
-                        device.links.add(Link(src["device"], src["port"], dst["device"],\
+                        device.links.add(Link(src["device"].strip("of:"), src["port"], dst["device"].strip("of:"),\
                                          dst["port"], state, link_type))
         except requests.HTTPError() as err:
             print(f"connection problem\n {err}")
@@ -71,9 +71,10 @@ class Getters:
             temp_json = temp.json()
             flows_temp = temp_json["flows"]
             for flow in flows_temp:
-                id = flow["id"]
-                device = flow["deviceId"].strip("of:")
-                self.flows[device] = id
+                if (flow["appId"] == "org.onosproject.rest"):
+                    id = flow["id"]
+                    device = flow["deviceId"].strip("of:")
+                    self.flows[device] = id
             #
         except requests.HTTPError() as err:
             print(f"connection problem\n {err}")
@@ -84,9 +85,9 @@ class Getters:
 
 g = Getters()
 g.get_flows()
-# g.get_devices()
-# g.get_links()
-# g.get_hosts()
-# g.print_devices()
+g.get_devices()
+g.get_links()
+g.get_hosts()
+g.print_devices()
 
 
