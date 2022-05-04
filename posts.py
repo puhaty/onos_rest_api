@@ -17,13 +17,6 @@ def post_simple_flow(priority, timeout, deviceId, out_port, ip_dst):
     print(flow.status_code, " ", flow.reason)
     return flow
 
-
-def xd():
-    devices = {}
-    for device in g.devices:
-        devices[device.id] = device
-
-
 def post_flow(host_1, host_2, route, stream):
     devices = {}
     for device in g.devices:
@@ -60,9 +53,8 @@ def delete_flows():
         session.delete(f"{http}/flows/of:{deviceId}/{id}")
 
 
-delete_flows()
+# delete_flows()
 # post_simple_flow(40000, 0, "0000000000000001", "2", "10.0.0.2")
 # post_simple_flow(40000, 0, "0000000000000001", "1", "10.0.0.1")
 # post_simple_flow(40000, 0, "0000000000000002", "1", "10.0.0.2")
 # post_simple_flow(40000, 0, "0000000000000002", "2", "10.0.0.1")
-# xd()

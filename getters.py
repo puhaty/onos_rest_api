@@ -83,11 +83,11 @@ class Getters:
         for device in self.devices:
             print(device)
 
-g = Getters()
-g.get_flows()
-g.get_devices()
-g.get_links()
-g.get_hosts()
-g.print_devices()
+# g = Getters()
+# g.get_flows()
+# g.get_devices()
+# g.get_links()
+# g.get_hosts()
+# g.print_devices()
 
 

@@ -1,4 +1,4 @@
-from routing import dijkstra_algorithm
+from routing import the_shorthest_path
 
 if __name__ == '__main__':
-    dijkstra_algorithm("10.0.0.1", "10.0.0.2")
+    the_shorthest_path("10.0.0.1", "10.0.0.10")

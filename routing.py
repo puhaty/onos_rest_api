@@ -2,7 +2,7 @@ from getters import Getters
 from posts import post_flow
 
 
-def dijkstra_algorithm(host_1, host_2, stream = 10):
+def the_shorthest_path(host_1, host_2, stream = 10):
     g = Getters()
     g.get_devices()
     g.get_links()
