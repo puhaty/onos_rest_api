@@ -41,5 +41,5 @@ class Link:
 
     def __str__(self) -> str:
         link_str = f"src : {self.src} port : {self.src_port} " \
-                   + f"dst : {self.dst} dst_port : {self.dst_port}"
+                   + f"dst : {self.dst} dst_port : {self.dst_port} value : {self.value}"
         return link_str
