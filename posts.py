@@ -11,18 +11,28 @@ def post_simple_flow(priority, timeout, deviceId, out_port, ip_dst):
     return flow
 
 def delete_flows():
+    g = Getters()
+    g.get_devices()
+    g.get_links()
+    g.get_hosts()
+    g.get_flows()
     for deviceId, id in g.flows.items():
         temp = session.delete(f"{http}/flows/of:{deviceId}/{id}")
         print(temp.status_code, " : ", temp.reason)
 
 
 def delete_devices():
+    g = Getters()
+    g.get_devices()
+    g.get_links()
+    g.get_hosts()
+    g.get_flows()
     for device_id in g.devices:
         temp = session.delete(f"{http}/devices/of:{device_id.id}")
         print(temp.status_code, " : ", temp.reason)
 
 # delete_devices()
-# delete_flows()
+delete_flows()
 # post_simple_flow(40000, 0, "0000000000000001", "2", "10.0.0.2")
 # post_simple_flow(40000, 0, "0000000000000001", "1", "10.0.0.1")
 # post_simple_flow(40000, 0, "0000000000000002", "1", "10.0.0.2")
