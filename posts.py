@@ -32,7 +32,7 @@ def delete_devices():
         print(temp.status_code, " : ", temp.reason)
 
 # delete_devices()
-delete_flows()
+# delete_flows()
 # post_simple_flow(40000, 0, "0000000000000001", "2", "10.0.0.2")
 # post_simple_flow(40000, 0, "0000000000000001", "1", "10.0.0.1")
 # post_simple_flow(40000, 0, "0000000000000002", "1", "10.0.0.2")
